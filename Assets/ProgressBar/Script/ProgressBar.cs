@@ -24,13 +24,13 @@ public class ProgressBar : MonoBehaviour
     public Color BarAlertColor;
 
     [Header("Sound Alert")]
-    public AudioClip sound;
+    //public AudioClip sound;
     public bool repeat = false;
     public float RepeatRate = 1f;
 
     private Image bar, barBackground;
     private float nextPlay;
-    private AudioSource audiosource;
+    //private AudioSource audiosource;
     private Text txtTitle;
     private float barValue;
     public float BarValue
@@ -54,7 +54,7 @@ public class ProgressBar : MonoBehaviour
         barBackground = GetComponent<Image>();
         txtTitle = transform.Find("Text").GetComponent<Text>();
         barBackground = transform.Find("BarBackground").GetComponent<Image>();
-        audiosource = GetComponent<AudioSource>();
+        //audiosource = GetComponent<AudioSource>();
     }
 
     private void Start()
@@ -109,7 +109,7 @@ public class ProgressBar : MonoBehaviour
             if (Alert >= barValue && Time.time > nextPlay)
             {
                 nextPlay = Time.time + RepeatRate;
-                audiosource.PlayOneShot(sound);
+                //audiosource.PlayOneShot(sound);
             }
         }
     }

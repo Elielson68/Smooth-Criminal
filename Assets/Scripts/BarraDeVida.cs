@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BarraDeVida : MonoBehaviour
 {
-    public ProgressBar pb;
-    public int Valor = 100;
+    
     void Start()
     {
 
@@ -14,6 +13,6 @@ public class BarraDeVida : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        pb.BarValue = Valor;
+        
     }
 }

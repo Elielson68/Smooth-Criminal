@@ -22,7 +22,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0cd4312c3ce094047bd4b021c98dfc8e, type: 2}
+  m_Motion: {fileID: 7400000, guid: f87bda76a1f86a04082c495f6a6f562b, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -131,7 +131,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: adc98587989e7c64b94f6b79c1ab7370, type: 2}
+  m_Motion: {fileID: 7400000, guid: b66883190392e8b499ac4de2291549c1, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -187,7 +187,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: e8875f4ac43e8ae40971ac8dd87cc82e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 3ef1e42c59cda1a498e7e56dd34c7a9c, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -224,7 +224,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: 1 1
+  m_Name: ClientAnim
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: parado
@@ -232,13 +232,13 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   - m_Name: socando
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 9100000}
+    m_Controller: {fileID: 0}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -297,14 +297,14 @@ AnimatorStateMachine:
     m_Position: {x: 290, y: 260, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -8116252664582581467}
-    m_Position: {x: 539.0897, y: 210.06137, z: 0}
+    m_Position: {x: 540, y: 210, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions: {}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 40, y: -20, z: 0}
-  m_EntryPosition: {x: 30, y: 150, z: 0}
+  m_EntryPosition: {x: 0, y: 160, z: 0}
   m_ExitPosition: {x: 780, y: -10, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
   m_DefaultState: {fileID: -3134823040220297479}

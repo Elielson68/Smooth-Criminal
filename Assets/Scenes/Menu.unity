@@ -289,9 +289,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 758120405}
-        m_TargetAssemblyTypeName: MenuEntrada, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1934450007}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: SairDoLobby
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -794,16 +794,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 758120405}
-        m_TargetAssemblyTypeName: MenuEntrada, Assembly-CSharp
-        m_MethodName: 
-        m_Mode: 1
+      - m_Target: {fileID: 1934450007}
+        m_TargetAssemblyTypeName: Menu, Assembly-CSharp
+        m_MethodName: ComecaJogo
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Ato1
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &319185743
@@ -1422,6 +1422,7 @@ GameObject:
   - component: {fileID: 758120409}
   - component: {fileID: 758120408}
   - component: {fileID: 758120407}
+  - component: {fileID: 758120411}
   m_Layer: 0
   m_Name: Lobby
   m_TagString: Untagged
@@ -1527,6 +1528,28 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &758120411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 758120405}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &898334270
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,6 +1893,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1457583877}
   - component: {fileID: 1457583878}
+  - component: {fileID: 1457583879}
   m_Layer: 0
   m_Name: GestorDeRede
   m_TagString: Untagged
@@ -1903,6 +1927,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3c9a10204c12fd43856ba41fa1461fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1457583879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1457583876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 999
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1684075415
 GameObject:
   m_ObjectHideFlags: 0
@@ -2264,7 +2310,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1967156104
 MonoBehaviour:
   m_ObjectHideFlags: 0
