@@ -7,8 +7,8 @@ using UnityEngine;
 public class MovimentacaoOffline : MonoBehaviour
 {
     public Animator animator;
-    [SerializeField] private Rigidbody2D rgdb;
-    public Rigidbody2D Rgdb { get => rgdb; set => rgdb = value; }
+    [SerializeField] private Rigidbody rgdb;
+    public Rigidbody Rgdb { get => rgdb; set => rgdb = value; }
 
     [SerializeField] private ProgressBar pb;
     public ProgressBar Pb { get { return pb; } set { pb = value; } }
@@ -18,7 +18,7 @@ public class MovimentacaoOffline : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
-        Rgdb = GetComponent<Rigidbody2D>();
+        Rgdb = GetComponent<Rigidbody>();
         Pb = Canvas.FindObjectOfType<ProgressBar>();
 
     }
@@ -78,10 +78,15 @@ public class MovimentacaoOffline : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
         animator.SetBool("parado", false);
-        Rgdb.velocity = new Vector2(0f, 2f);
+        
         if(gameObject.transform.position.y >= _pontoReferenciaInferior.position.y && gameObject.transform.position.z <= _pontoReferenciaSuperior.position.z)
         {
-            gameObject.transform.Translate(0, 0, 0.1f);
+            Rgdb.velocity = new Vector2(0f, 80f * Time.deltaTime);
+            gameObject.transform.Translate(0, 0, 1f * Time.deltaTime);
+        }
+        else
+        {
+            Rgdb.velocity = new Vector2(0f, 200f * Time.deltaTime);
         }
         
         
@@ -90,10 +95,15 @@ public class MovimentacaoOffline : MonoBehaviour
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
         animator.SetBool("parado", false);
-        Rgdb.velocity = new Vector2(0f, -2f);
-        if (gameObject.transform.position.y <= _pontoReferenciaSuperior.position.y && gameObject.transform.position.z <= _pontoReferenciaInferior.position.z)
+        
+        if (gameObject.transform.position.y <= _pontoReferenciaSuperior.position.y && gameObject.transform.position.z >= _pontoReferenciaInferior.position.z)
         {
-
+            Rgdb.velocity = new Vector2(0f, -80f*Time.deltaTime);
+            gameObject.transform.Translate(0, 0, -1f * Time.deltaTime);
+        }
+        else
+        {
+            Rgdb.velocity = new Vector2(0f, -200f * Time.deltaTime);
         }
     }
     void Socando()
