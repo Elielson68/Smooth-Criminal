@@ -1452,6 +1452,10 @@ PrefabInstance:
       propertyPath: _pontoReferenciaSuperior
       value: 
       objectReference: {fileID: 1002177161}
+    - target: {fileID: 3027465084802551979, guid: d1a7f1207eb6b044fa80f6371354d539, type: 3}
+      propertyPath: m_Size.z
+      value: 0.02
+      objectReference: {fileID: 0}
     - target: {fileID: 3895869125761783765, guid: d1a7f1207eb6b044fa80f6371354d539, type: 3}
       propertyPath: m_Name
       value: PersoOff
