@@ -123,6 +123,8 @@ MonoBehaviour:
   rgdb: {fileID: 3895869125761783760}
   pb: {fileID: 0}
   Valor: 100
+  _pontoReferenciaInferior: {fileID: 8815005000545156849, guid: 96277f5a1d17b5b4c9f5d68026b11024, type: 3}
+  _pontoReferenciaSuperior: {fileID: 741159227396129334, guid: 19b5ca9799ff5a74ea948cfc2c4f7f81, type: 3}
 --- !u!50 &3895869125761783760
 Rigidbody2D:
   serializedVersion: 4

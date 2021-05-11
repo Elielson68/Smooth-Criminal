@@ -15,6 +15,8 @@ public class movimentacao : MonoBehaviourPunCallbacks
     [SerializeField] private ProgressBar pb;
     public ProgressBar Pb { get { return pb; } set { pb = value; } }
     [SerializeField] private int Valor = 100;
+    [SerializeField] private Transform _pontoReferenciaInferior;
+    [SerializeField] private Transform _pontoReferenciaSuperior;
     void Start()
     {
         animator = GetComponent<Animator>();
