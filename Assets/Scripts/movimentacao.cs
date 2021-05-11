@@ -116,14 +116,34 @@ public class movimentacao : MonoBehaviourPunCallbacks
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
         animator.SetBool("parado", false);
-        rgdb.velocity = new Vector2(0f, 2f);
+        
+        if(gameObject.transform.position.y >= _pontoReferenciaInferior.position.y && gameObject.transform.position.z <= _pontoReferenciaSuperior.position.z)
+        {
+            Rgdb.velocity = new Vector3(0f, 0, 800f * Time.deltaTime);
+            //gameObject.transform.Translate(0, 0, );
+        }
+        else
+        {
+            Rgdb.velocity = new Vector2(0f, 400f * Time.deltaTime);
+        }
+        
+        
     }
     [PunRPC]
     void MovendoBaixo()
     {
         transform.rotation = Quaternion.Euler(0, 0, 0);
         animator.SetBool("parado", false);
-        rgdb.velocity = new Vector2(0f, -2f);
+        
+        if (gameObject.transform.position.y <= _pontoReferenciaSuperior.position.y && gameObject.transform.position.z >= _pontoReferenciaInferior.position.z)
+        {
+            Rgdb.velocity = new Vector3(0f, 0, -800f * Time.deltaTime);
+            //gameObject.transform.Translate(0, 0, -1f * Time.deltaTime);
+        }
+        else
+        {
+            Rgdb.velocity = new Vector2(0f, -400f * Time.deltaTime);
+        }
     }
     [PunRPC]
     void Socando()
