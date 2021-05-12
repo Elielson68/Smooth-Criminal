@@ -8,19 +8,19 @@ using UnityEngine;
 public class movimentacao : MonoBehaviourPunCallbacks
 {
     public Animator animator;
-    [SerializeField] private Rigidbody2D rgdb;
-    public Rigidbody2D Rgdb { get => rgdb; set => rgdb = value; }
+    [SerializeField] private Rigidbody rgdb;
+    public Rigidbody Rgdb { get => rgdb; set => rgdb = value; }
     private Player _photonPlayer;
     private int _id;
     [SerializeField] private ProgressBar pb;
     public ProgressBar Pb { get { return pb; } set { pb = value; } }
     [SerializeField] private int Valor = 100;
-    [SerializeField] private Transform _pontoReferenciaInferior;
-    [SerializeField] private Transform _pontoReferenciaSuperior;
+    [SerializeField] public Transform _pontoReferenciaInferior;
+    [SerializeField] public Transform _pontoReferenciaSuperior;
     void Start()
     {
         animator = GetComponent<Animator>();
-        Rgdb = GetComponent<Rigidbody2D>();
+        Rgdb = GetComponent<Rigidbody>();
         Pb = Canvas.FindObjectOfType<ProgressBar>();
         
     }
@@ -121,12 +121,12 @@ public class movimentacao : MonoBehaviourPunCallbacks
         
         if(gameObject.transform.position.y >= _pontoReferenciaInferior.position.y && gameObject.transform.position.z <= _pontoReferenciaSuperior.position.z)
         {
-            Rgdb.velocity = new Vector3(0f, 0, 800f * Time.deltaTime);
+            Rgdb.velocity = new Vector3(0f, 0, 4f);
             //gameObject.transform.Translate(0, 0, );
         }
         else
         {
-            Rgdb.velocity = new Vector2(0f, 400f * Time.deltaTime);
+            Rgdb.velocity = new Vector2(0f, 2f);
         }
         
         
@@ -139,12 +139,12 @@ public class movimentacao : MonoBehaviourPunCallbacks
         
         if (gameObject.transform.position.y <= _pontoReferenciaSuperior.position.y && gameObject.transform.position.z >= _pontoReferenciaInferior.position.z)
         {
-            Rgdb.velocity = new Vector3(0f, 0, -800f * Time.deltaTime);
+            Rgdb.velocity = new Vector3(0f, 0, -4f);
             //gameObject.transform.Translate(0, 0, -1f * Time.deltaTime);
         }
         else
         {
-            Rgdb.velocity = new Vector2(0f, -400f * Time.deltaTime);
+            Rgdb.velocity = new Vector2(0f, -2f);
         }
     }
     [PunRPC]

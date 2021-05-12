@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviourPunCallbacks
 
     [SerializeField] private string _localizacaoPrefab;
     [SerializeField] private Transform _spawnJogadores;
+    [SerializeField] public GameObject _spawnInferior;
+    [SerializeField] public GameObject _spawnSuperior;
     private int _jogadoresEmJogo;
     private List<movimentacao> _jogadores;
 
@@ -43,8 +45,11 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void CriaJogador()
     {
         var jogadorObj = PhotonNetwork.Instantiate(_localizacaoPrefab, _spawnJogadores.position, Quaternion.identity);
+        var inferior = Instantiate(_spawnInferior, _spawnInferior.transform.position, Quaternion.identity);
+        var superior = Instantiate(_spawnSuperior, _spawnSuperior.transform.position, Quaternion.identity);
         var jogador = jogadorObj.GetComponent<movimentacao>();
-
+        jogador._pontoReferenciaInferior = inferior.transform;
+        jogador._pontoReferenciaSuperior = superior.transform;
         jogador.photonView.RPC("Inicializa", RpcTarget.All, PhotonNetwork.LocalPlayer);
     }
 }
