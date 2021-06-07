@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviourPunCallbacks
     private void CriaJogador()
     {
         var jogadorObj = PhotonNetwork.Instantiate(_localizacaoPrefab, _spawnJogadores.position, Quaternion.identity);
+        _spawnJogadores.Translate(3,0,0);
         var inferior = Instantiate(_spawnInferior, _spawnInferior.transform.position, Quaternion.identity);
         var superior = Instantiate(_spawnSuperior, _spawnSuperior.transform.position, Quaternion.identity);
         var jogador = jogadorObj.GetComponent<movimentacao>();

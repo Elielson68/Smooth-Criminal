@@ -27,8 +27,13 @@ public class MovimentacaoOffline : MonoBehaviour
     void Update() 
     { 
         Pb.BarValue = Valor;
+        
+    }
+    
+    void FixedUpdate(){
         if (Input.anyKey)
         {
+
             Movendo();
         }
         else
@@ -81,12 +86,12 @@ public class MovimentacaoOffline : MonoBehaviour
         
         if(gameObject.transform.position.y >= _pontoReferenciaInferior.position.y && gameObject.transform.position.z <= _pontoReferenciaSuperior.position.z)
         {
-            Rgdb.velocity = new Vector3(0f, 0, 800f * Time.deltaTime);
+            Rgdb.velocity = new Vector3(0f, 0, 2f);
             //gameObject.transform.Translate(0, 0, );
         }
         else
         {
-            Rgdb.velocity = new Vector2(0f, 400f * Time.deltaTime);
+            Rgdb.velocity = new Vector2(0f, 2f);
         }
         
         
@@ -98,12 +103,12 @@ public class MovimentacaoOffline : MonoBehaviour
         
         if (gameObject.transform.position.y <= _pontoReferenciaSuperior.position.y && gameObject.transform.position.z >= _pontoReferenciaInferior.position.z)
         {
-            Rgdb.velocity = new Vector3(0f, 0, -800f * Time.deltaTime);
-            //gameObject.transform.Translate(0, 0, -1f * Time.deltaTime);
+            Rgdb.velocity = new Vector3(0f, 0, -2f);
+            //gameObject.transform.Translate(0, 0, -1f);
         }
         else
         {
-            Rgdb.velocity = new Vector2(0f, -400f * Time.deltaTime);
+            Rgdb.velocity = new Vector2(0f, -2f);
         }
     }
     void Socando()

@@ -450,7 +450,7 @@ namespace Photon.Realtime
     public class PingHttp : PhotonPing
     {
         private WWW webRequest;
-
+        
         public override bool StartPing(string address)
         {
             base.Init();

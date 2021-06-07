@@ -34,7 +34,6 @@ public class movimentacao : MonoBehaviourPunCallbacks
         
         if (player.IsMasterClient)
         {
-            //pb.BarValue = 100;
             SpriteRenderer Host = GetComponent<SpriteRenderer>();
             Texture2D Personagem = Resources.Load<Texture2D>("Personagens/personagem 1/idle/1");
             Sprite PersonagemSprite = Sprite.Create(Personagem, new Rect(0.0f, 0.0f, Personagem.width, Personagem.height), new Vector2(0.0f, 0.0f), 100.0f);
@@ -43,7 +42,6 @@ public class movimentacao : MonoBehaviourPunCallbacks
         }
         else
         {
-            //pb.BarValue = 50;
             SpriteRenderer Client = GetComponent<SpriteRenderer>();
             Texture2D Personagem = Resources.Load<Texture2D>("Personagens/personagem 2/idle/1");
             Sprite PersonagemSprite = Sprite.Create(Personagem, new Rect(0.0f, 0.0f, Personagem.width, Personagem.height), new Vector2(0.0f, 0.0f), 100.0f);
@@ -53,12 +51,10 @@ public class movimentacao : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
         {
             Rgdb.isKinematic = true;
-
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (photonView.IsMine)
         {
@@ -122,7 +118,6 @@ public class movimentacao : MonoBehaviourPunCallbacks
         if(gameObject.transform.position.y >= _pontoReferenciaInferior.position.y && gameObject.transform.position.z <= _pontoReferenciaSuperior.position.z)
         {
             Rgdb.velocity = new Vector3(0f, 0, 4f);
-            //gameObject.transform.Translate(0, 0, );
         }
         else
         {
@@ -140,7 +135,6 @@ public class movimentacao : MonoBehaviourPunCallbacks
         if (gameObject.transform.position.y <= _pontoReferenciaSuperior.position.y && gameObject.transform.position.z >= _pontoReferenciaInferior.position.z)
         {
             Rgdb.velocity = new Vector3(0f, 0, -4f);
-            //gameObject.transform.Translate(0, 0, -1f * Time.deltaTime);
         }
         else
         {
@@ -159,6 +153,14 @@ public class movimentacao : MonoBehaviourPunCallbacks
         animator.SetBool("parado", true);
         animator.SetBool("socando", false);
         Rgdb.velocity = new Vector2(0, 0);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+      if (collision.gameObject.tag == "Player")
+      {
+          Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), collision.collider);
+      }
     }
 
 }

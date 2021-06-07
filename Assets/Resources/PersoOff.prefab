@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 3895869125761783764}
-  rgdb: {fileID: 0}
+  rgdb: {fileID: 6780262391365889020}
   pb: {fileID: 0}
   Valor: 100
   _pontoReferenciaInferior: {fileID: 0}
