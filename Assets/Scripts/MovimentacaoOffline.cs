@@ -1,4 +1,4 @@
-using Photon.Realtime;
+    using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,9 +9,7 @@ public class MovimentacaoOffline : MonoBehaviour
     public Animator animator;
     [SerializeField] private Rigidbody rgdb;
     public Rigidbody Rgdb { get => rgdb; set => rgdb = value; }
-
-    [SerializeField] private ProgressBar pb;
-    public ProgressBar Pb { get { return pb; } set { pb = value; } }
+    public GameObject Punho;
     [SerializeField] private int Valor = 100;
     [SerializeField] private Transform _pontoReferenciaInferior;
     [SerializeField] private Transform _pontoReferenciaSuperior;
@@ -19,17 +17,10 @@ public class MovimentacaoOffline : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         Rgdb = GetComponent<Rigidbody>();
-        Pb = Canvas.FindObjectOfType<ProgressBar>();
-
-    }
-
-    // Update is called once per frame
-    void Update() 
-    { 
-        Pb.BarValue = Valor;
         
+
     }
-    
+
     void FixedUpdate(){
         if (Input.anyKey)
         {
@@ -115,9 +106,15 @@ public class MovimentacaoOffline : MonoBehaviour
     {
         animator.SetBool("socando", true);
     }
-
+    void SocandoBoxCollider(){
+        Punho.SetActive(true);
+    }
+    void CancelandoBoxCollider(){
+        Punho.SetActive(false);
+    }
     void CancelarAnimacoes()
     {
+        Punho.SetActive(false);
         animator.SetBool("parado", true);
         animator.SetBool("socando", false);
         Rgdb.velocity = new Vector2(0, 0);
