@@ -109,6 +109,7 @@ public class MovimentacaoOffline : MonoBehaviour
     void SocandoBoxCollider(){
         Punho.SetActive(true);
     }
+    
     void CancelandoBoxCollider(){
         Punho.SetActive(false);
     }

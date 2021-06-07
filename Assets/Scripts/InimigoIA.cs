@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public class InimigoIA : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+public class InimigoIA : MonoBehaviourPunCallbacks
 {
     Vector3 smooth = Vector3.zero;
     private Animator animacao;
@@ -20,6 +21,11 @@ public class InimigoIA : MonoBehaviour
         Debug.DrawRay(gameObject.transform.position, Vector3.right/1.9f, Color.red);
         Debug.DrawRay(gameObject.transform.position, Vector3.left*3, Color.green);
         Debug.DrawRay(gameObject.transform.position, Vector3.left/1.9f, Color.red);
+        photonView.RPC("IACombate", RpcTarget.All);
+        
+    }
+    [PunRPC]
+    void IACombate(){
         RaycastHit hit;
         if (Physics.Raycast(gameObject.transform.position, Vector3.right*3,out hit, 3f)){
             if(hit.distance < 0.5){
@@ -67,13 +73,19 @@ public class InimigoIA : MonoBehaviour
         else{
             animacao.SetBool("parado", true);
         }
-        
     }
-
     public void Bater(){
+        photonView.RPC("RPCBater", RpcTarget.All);
+    }
+    [PunRPC]
+    public void RPCBater(){
         Punho.SetActive(true);
     }
     public void PararDano(){
+        photonView.RPC("RPCPararDano", RpcTarget.All);
+    }
+    [PunRPC]
+    public void RPCPararDano(){
         animacao.SetBool("levandoDano", false);
     }
 

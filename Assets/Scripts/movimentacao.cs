@@ -12,8 +12,7 @@ public class movimentacao : MonoBehaviourPunCallbacks
     public Rigidbody Rgdb { get => rgdb; set => rgdb = value; }
     private Player _photonPlayer;
     private int _id;
-    [SerializeField] private ProgressBar pb;
-    public ProgressBar Pb { get { return pb; } set { pb = value; } }
+    public GameObject Punho;
     [SerializeField] private int Valor = 100;
     [SerializeField] public Transform _pontoReferenciaInferior;
     [SerializeField] public Transform _pontoReferenciaSuperior;
@@ -21,8 +20,6 @@ public class movimentacao : MonoBehaviourPunCallbacks
     {
         animator = GetComponent<Animator>();
         Rgdb = GetComponent<Rigidbody>();
-        Pb = Canvas.FindObjectOfType<ProgressBar>();
-        
     }
 
     [PunRPC]
@@ -58,7 +55,6 @@ public class movimentacao : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            Pb.BarValue = Valor;
             if (Input.anyKey)
             {
                 Movendo();
@@ -146,7 +142,22 @@ public class movimentacao : MonoBehaviourPunCallbacks
     {
         animator.SetBool("socando", true);
     }
-
+    
+    void SocandoBoxCollider(){
+        photonView.RPC("RPCSocandoBoxCollider", RpcTarget.All);
+    }
+    [PunRPC]
+    void RPCSocandoBoxCollider(){
+        Punho.SetActive(true);
+    }
+    
+    void CancelandoBoxCollider(){
+        photonView.RPC("RPCCancelandoBoxCollider", RpcTarget.All);
+    }
+    [PunRPC]
+    void RPCCancelandoBoxCollider(){
+        Punho.SetActive(false);
+    }
     [PunRPC]
     void CancelarAnimacoes()
     {
