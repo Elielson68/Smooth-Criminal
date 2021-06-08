@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+
+[RequireComponent(typeof(Rigidbody))]
 public class InimigoIA : MonoBehaviourPunCallbacks
 {
     Vector3 smooth = Vector3.zero;

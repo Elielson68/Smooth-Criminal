@@ -53,13 +53,21 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
         }
         return lista;
     }
-
+    public int ObterQuantidadeDeJogadores()
+    {
+        return PhotonNetwork.PlayerList.Length;
+    }
+    public string ObterNomeDaSala()
+    {
+        return PhotonNetwork.CurrentRoom.Name;
+    }
     public bool DonoDaSala()
     {
+        
         return PhotonNetwork.IsMasterClient;
     }
 
-    public void SairDoLobby()
+    public void SairDaSala()
     {
         PhotonNetwork.LeaveRoom();
     }

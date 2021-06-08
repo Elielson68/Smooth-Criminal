@@ -21,9 +21,14 @@ public class Vida : MonoBehaviourPunCallbacks
     }
 
     void FixedUpdate() {
-        photonView.RPC("VerificarMorte", RpcTarget.All);
-        photonView.RPC("MovimentarVida", RpcTarget.All);
-        photonView.RPC("vidaPlayer", RpcTarget.All);
+        
+         if (photonView.IsMine)
+        {
+            photonView.RPC("VerificarMorte", RpcTarget.All);
+            photonView.RPC("MovimentarVida", RpcTarget.All);
+            photonView.RPC("vidaPlayer", RpcTarget.All);
+        }
+
     }
     [PunRPC]
     void VerificarMorte(){

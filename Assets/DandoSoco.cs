@@ -6,13 +6,19 @@ using Photon.Realtime;
 public class DandoSoco : MonoBehaviourPunCallbacks
 {
     // Start is called before the first frame update
+    float vidaAtual = 0;
+    Animator aux_anim;
+    Vida aux_vida;
     void OnTriggerEnter(Collider other) {
-        photonView.RPC("DarSoco", RpcTarget.All, other);
+        aux_vida = other.GetComponent<Vida>();
+        aux_anim = other.GetComponent<Animator>();
+        photonView.RPC("DarSoco", RpcTarget.All, 2);
+        
     }
     [PunRPC]
-    void DarSoco(Collider other){
-        other.GetComponent<Vida>().vidaAtual -= 50;
-        other.GetComponent<Animator>().SetBool("levandoDano", true);
+    void DarSoco(int vidaretirada){
+        aux_anim.SetBool("levandoDano", true);
+        aux_vida.vidaAtual -= vidaretirada;
         gameObject.SetActive(false);
     }
     

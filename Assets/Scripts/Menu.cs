@@ -24,6 +24,10 @@ public class Menu : MonoBehaviourPunCallbacks
     {
         MudaMenu(_menuLobby.gameObject);
         _menuLobby.photonView.RPC("AtualizaLista", RpcTarget.All);
+        if(GestorDeRede.Instance.ObterQuantidadeDeJogadores() > 2){
+            SairDoLobby();
+        }
+        _menuEntrada.VerificarJogadores();
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -39,7 +43,7 @@ public class Menu : MonoBehaviourPunCallbacks
 
     public void SairDoLobby()
     {
-        GestorDeRede.Instance.SairDoLobby();
+        GestorDeRede.Instance.SairDaSala();
         MudaMenu(_menuEntrada.gameObject);
     }
 

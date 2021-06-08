@@ -144,7 +144,10 @@ public class movimentacao : MonoBehaviourPunCallbacks
     }
     
     void SocandoBoxCollider(){
-        photonView.RPC("RPCSocandoBoxCollider", RpcTarget.All);
+        if (photonView.IsMine)
+        {
+            photonView.RPC("RPCSocandoBoxCollider", RpcTarget.All);
+        }
     }
     [PunRPC]
     void RPCSocandoBoxCollider(){
@@ -152,7 +155,10 @@ public class movimentacao : MonoBehaviourPunCallbacks
     }
     
     void CancelandoBoxCollider(){
-        photonView.RPC("RPCCancelandoBoxCollider", RpcTarget.All);
+        if (photonView.IsMine)
+        {
+            photonView.RPC("RPCCancelandoBoxCollider", RpcTarget.All);
+        }
     }
     [PunRPC]
     void RPCCancelandoBoxCollider(){
