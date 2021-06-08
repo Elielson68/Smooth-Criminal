@@ -20,7 +20,6 @@ public class MenuEntrada : MonoBehaviour
     }
 
     public void VerificarJogadores(){
-        Debug.Log(GestorDeRede.Instance.ObterQuantidadeDeJogadores());
         if(GestorDeRede.Instance.ObterQuantidadeDeJogadores() > 2){
             _errorEntrarSala.text = "SALA CHEIA!";
             _nomeDoJogador.text = "";

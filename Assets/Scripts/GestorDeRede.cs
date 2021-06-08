@@ -11,7 +11,7 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
     {
         if (Instance != null && Instance != this)
         {
-            gameObject.SetActive(false);
+            Destroy(gameObject);
             return;
         }
         Instance = this;
@@ -20,7 +20,10 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
 
     private void Start()
     {
-        PhotonNetwork.ConnectUsingSettings();
+        if(Instance==this){
+            PhotonNetwork.ConnectUsingSettings();
+        }
+        
     }
 
     public override void OnConnectedToMaster()

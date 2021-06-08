@@ -447,6 +447,7 @@ namespace Photon.Realtime
 
 
     #if UNITY_WEBGL
+    
     public class PingHttp : PhotonPing
     {
         private WWW webRequest;

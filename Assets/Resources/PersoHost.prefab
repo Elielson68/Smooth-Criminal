@@ -139,6 +139,7 @@ GameObject:
   - component: {fileID: 3895869125761783766}
   - component: {fileID: 3895869125761783767}
   - component: {fileID: 3895869125761783764}
+  - component: {fileID: 4600513922273050776}
   - component: {fileID: 3895869125761783761}
   - component: {fileID: 3895869125761783775}
   - component: {fileID: 3895869125761783772}
@@ -160,7 +161,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3895869125761783765}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -331.52243, y: -76.93, z: -0.48}
+  m_LocalPosition: {x: 0.707, y: 0.115899265, z: 1.91}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 615694951}
@@ -238,6 +239,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4600513922273050776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895869125761783765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6366bc54026a60041aee5bc442d501f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rgdb: {fileID: 8444324798831032745}
+  animator: {fileID: 3895869125761783764}
 --- !u!114 &3895869125761783761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,6 +268,8 @@ MonoBehaviour:
   animator: {fileID: 3895869125761783764}
   rgdb: {fileID: 8444324798831032745}
   Punho: {fileID: 615694950}
+  velEixoZ: 0
+  velEixoY: 0
   Valor: 100
   _pontoReferenciaInferior: {fileID: 0}
   _pontoReferenciaSuperior: {fileID: 0}
@@ -339,4 +356,6 @@ MonoBehaviour:
   BarraVida: {fileID: 114769781544105922, guid: 5eefba205a58c8c4a937c97b87c185a3, type: 3}
   PrefabBar: {fileID: 1825481033360878, guid: 5eefba205a58c8c4a937c97b87c185a3, type: 3}
   posVida: {fileID: 1819711130}
+  CorVida: {r: 0, g: 0.95686275, b: 0, a: 0}
+  CorVidaCritica: {r: 1, g: 0, b: 0, a: 0}
   vidaAtual: 100

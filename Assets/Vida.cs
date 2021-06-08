@@ -10,22 +10,27 @@ public class Vida : MonoBehaviourPunCallbacks
     public ProgressBar Pb { get { return BarraVida; } set { BarraVida = value; } }
     public GameObject PrefabBar;
     public GameObject posVida;
+    public Color CorVida;
+    public Color CorVidaCritica;
     private GameObject prefabCriado;
     //public Camera cam;
     public float vidaAtual = 100;
     void Start() {
-        
         prefabCriado = Canvas.Instantiate<GameObject>(PrefabBar, posVida.transform.position, posVida.transform.rotation, Canvas.FindObjectOfType<Canvas>().transform);
         prefabCriado.transform.position = new Vector3(-260, -67, 0);
         Pb = prefabCriado.GetComponent<ProgressBar>();
         Pb.BarValue = vidaAtual;
+        Pb.BarColor = CorVida;
+        Pb.BarAlertColor = CorVidaCritica;
     }
 
     void FixedUpdate() {
         
          if (photonView.IsMine)
         {
-            photonView.RPC("VerificarMorte", RpcTarget.All);
+            if(vidaAtual == 0){
+                photonView.RPC("VerificarMorte", RpcTarget.All);
+            }
             photonView.RPC("MovimentarVida", RpcTarget.All);
             photonView.RPC("vidaPlayer", RpcTarget.All);
         }
@@ -33,10 +38,8 @@ public class Vida : MonoBehaviourPunCallbacks
     }
     [PunRPC]
     void VerificarMorte(){
-        if(vidaAtual == 0){
-            gameObject.GetComponent<Animator>().SetBool("morrendo", true);
-            prefabCriado.SetActive(false);
-        }
+        gameObject.GetComponent<Animator>().SetBool("morrendo", true);
+        prefabCriado.SetActive(false);
     }
     [PunRPC]
     void MovimentarVida(){
