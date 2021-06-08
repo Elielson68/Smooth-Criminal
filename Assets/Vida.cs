@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 public class Vida : MonoBehaviourPunCallbacks
@@ -49,10 +50,20 @@ public class Vida : MonoBehaviourPunCallbacks
     }
     
     void DanoLevado(){
-        photonView.RPC("RPCDanoLevado", RpcTarget.All);
+        if (photonView.IsMine)
+        {
+            if(gameObject.tag == "Player"){
+                Button Sair = Canvas.FindObjectOfType<Button>();
+                Sair.GetComponent<Image>().enabled = true;
+                Sair.GetComponent<Button>().enabled = true;
+                Sair.GetComponentInChildren<Text>().text = "Sair";
+            }
+            photonView.RPC("RPCDanoLevado", RpcTarget.All);
+        }
     }
     [PunRPC]
     void RPCDanoLevado(){
+        
         Destroy(gameObject);
         Destroy(prefabCriado);
     }

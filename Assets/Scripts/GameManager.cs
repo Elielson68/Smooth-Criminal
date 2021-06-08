@@ -32,6 +32,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         _jogadores = new List<movimentacao>();
     }
 
+
     [PunRPC]
     private void AdicionaJogador()
     {
@@ -52,5 +53,12 @@ public class GameManager : MonoBehaviourPunCallbacks
         jogador._pontoReferenciaInferior = inferior.transform;
         jogador._pontoReferenciaSuperior = superior.transform;
         jogador.photonView.RPC("Inicializa", RpcTarget.All, PhotonNetwork.LocalPlayer);
+    }
+
+    public void SairJogo(){
+        GestorDeRede.Instance.ComecaJogo("Morte");
+    }
+    public void VoltarTelaInicial(){
+        GestorDeRede.Instance.ComecaJogo("Menu");
     }
 }

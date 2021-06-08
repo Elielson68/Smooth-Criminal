@@ -55,48 +55,48 @@ public class movimentacao : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine)
         {
-            if (Input.anyKey)
+            photonView.RPC("CongelarMovimento", RpcTarget.All);
+            if (Input.GetKey(KeyCode.F))
             {
-                Movendo();
+                photonView.RPC("Socando", RpcTarget.All);
             }
-            else
+            else if (!animator.GetBool("socando"))
+            {
+                if (Input.GetKey(KeyCode.D))
+                {
+                    photonView.RPC("MovendoDireita", RpcTarget.All);
+                }
+                if (Input.GetKey(KeyCode.A))
+                {
+                    photonView.RPC("MovendoEsquerda", RpcTarget.All);
+                }
+                if (Input.GetKey(KeyCode.S))
+                {
+                    photonView.RPC("MovendoBaixo", RpcTarget.All);
+                }
+                if (Input.GetKey(KeyCode.W))
+                {
+                    photonView.RPC("MovendoCima", RpcTarget.All);
+                }
+            }
+            if(!Input.anyKey)
             {
                 photonView.RPC("CancelarAnimacoes", RpcTarget.All);
             }
-        }
-
-    }
-
-    void Movendo()
-    {
-        if (Input.GetKey(KeyCode.D))
-        {
-            photonView.RPC("MovendoDireita", RpcTarget.All);
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            photonView.RPC("MovendoEsquerda", RpcTarget.All);
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            photonView.RPC("MovendoBaixo", RpcTarget.All);
-        }
-        if (Input.GetKey(KeyCode.W))
-        {
-            photonView.RPC("MovendoCima", RpcTarget.All);
-        }
-        if (Input.GetKey(KeyCode.F))
-        {
-            photonView.RPC("Socando", RpcTarget.All);
         }
     }
     [PunRPC]
     void MovendoEsquerda()
     {
         transform.rotation = Quaternion.Euler(0, 180, 0);
-        
         animator.SetBool("parado", false);
         Rgdb.velocity = new Vector2(-2f, 0f);
+    }
+    [PunRPC]
+    void CongelarMovimento(){
+        if(animator.GetBool("socando")){
+            Rgdb.velocity = new Vector2(0f, 0f);
+        }
     }
     [PunRPC]
     void MovendoDireita()
@@ -179,5 +179,6 @@ public class movimentacao : MonoBehaviourPunCallbacks
           Physics.IgnoreCollision(gameObject.GetComponent<BoxCollider>(), collision.collider);
       }
     }
+
 
 }
