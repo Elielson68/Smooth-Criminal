@@ -9,7 +9,7 @@ public class CriarSpritePlayer : MonoBehaviourPunCallbacks
 {
     [SerializeField] private Rigidbody rgdb;
     public Rigidbody Rgdb { get => rgdb; set => rgdb = value; }
-    private Player _photonPlayer;
+    public Player _photonPlayer;
     private int _id;
     public Animator animator;
     [PunRPC]

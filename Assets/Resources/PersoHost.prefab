@@ -354,8 +354,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BarraVida: {fileID: 114769781544105922, guid: 5eefba205a58c8c4a937c97b87c185a3, type: 3}
-  PrefabBar: {fileID: 1825481033360878, guid: 5eefba205a58c8c4a937c97b87c185a3, type: 3}
   posVida: {fileID: 1819711130}
-  CorVida: {r: 0, g: 0.95686275, b: 0, a: 0}
-  CorVidaCritica: {r: 1, g: 0, b: 0, a: 0}
   vidaAtual: 100

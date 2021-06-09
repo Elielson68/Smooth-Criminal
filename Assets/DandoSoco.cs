@@ -12,7 +12,11 @@ public class DandoSoco : MonoBehaviourPunCallbacks
     void OnTriggerEnter(Collider other) {
         aux_vida = other.GetComponent<Vida>();
         aux_anim = other.GetComponent<Animator>();
-        photonView.RPC("DarSoco", RpcTarget.All, 2);
+        float dist = Mathf.Abs(transform.position.z - other.transform.position.z); 
+        if(dist < 0.5f){
+            photonView.RPC("DarSoco", RpcTarget.All, 2);
+        }
+        
         
     }
     [PunRPC]

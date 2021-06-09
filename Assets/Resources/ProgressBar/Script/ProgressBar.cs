@@ -24,13 +24,13 @@ public class ProgressBar : MonoBehaviour
     public Color BarAlertColor;
 
     [Header("Sound Alert")]
-    //public AudioClip sound;
+    public AudioClip sound;
     public bool repeat = false;
     public float RepeatRate = 1f;
 
     private Image bar, barBackground;
     private float nextPlay;
-    //private AudioSource audiosource;
+    private AudioSource audiosource;
     private Text txtTitle;
     private float barValue;
     public float BarValue

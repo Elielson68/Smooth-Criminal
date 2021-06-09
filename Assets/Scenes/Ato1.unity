@@ -325,8 +325,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 621581045}
-  m_Father: {fileID: 1490644522}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -718,7 +718,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8927832435355462099, guid: a4899c1cb3dca56469983a7e2e801a2a, type: 3}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: SairJogo
         m_Mode: 1
@@ -729,7 +729,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 2
+        m_CallState: 1
 --- !u!114 &621581047
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -912,8 +912,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.21513152, y: 2.7365935, z: 3.8744512}
-  m_Center: {x: 4.07, y: -1.3668357, z: -1.59}
+  m_Size: {x: 0.21513176, y: 2.7365935, z: 6.851177}
+  m_Center: {x: 4.07, y: -1.3668357, z: -0.4029503}
 --- !u!65 &840213529
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -925,8 +925,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.15864372, y: 2.7140112, z: 6.0028167}
-  m_Center: {x: -8.98611, y: -1.332963, z: 0.035137415}
+  m_Size: {x: 0.15864372, y: 2.7140112, z: 6.843952}
+  m_Center: {x: -8.98611, y: -1.332963, z: -0.38543034}
 --- !u!65 &840213530
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1031,37 +1031,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.35, y: 0.14470777, z: 0.12272383}
   m_Center: {x: 0.00085961976, y: 0.0069571133, z: -0.054519553}
---- !u!1 &1490644521
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1490644522}
-  m_Layer: 0
-  m_Name: '## UI ##'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1490644522
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1490644521}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 292738002}
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1647977781
 GameObject:
   m_ObjectHideFlags: 0
@@ -1627,6 +1596,14 @@ PrefabInstance:
     - target: {fileID: 3460948684512119289, guid: 5cf81699a6a74c54ebb882fed4718435, type: 3}
       propertyPath: m_Name
       value: Inimigo2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3645569414756702138, guid: 5cf81699a6a74c54ebb882fed4718435, type: 3}
+      propertyPath: fonte
+      value: 
+      objectReference: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3645569414756702138, guid: 5cf81699a6a74c54ebb882fed4718435, type: 3}
+      propertyPath: BarraVida
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cf81699a6a74c54ebb882fed4718435, type: 3}

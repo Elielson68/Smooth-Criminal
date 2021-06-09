@@ -8,22 +8,25 @@ public class Vida : MonoBehaviourPunCallbacks
 {
     [SerializeField] private ProgressBar BarraVida;
     public ProgressBar Pb { get { return BarraVida; } set { BarraVida = value; } }
-    public GameObject PrefabBar;
     public GameObject posVida;
-    public Color CorVida;
-    public Color CorVidaCritica;
     private GameObject prefabCriado;
     //public Camera cam;
     public float vidaAtual = 100;
-    void Start() {
-        prefabCriado = Canvas.Instantiate<GameObject>(PrefabBar, posVida.transform.position, posVida.transform.rotation, Canvas.FindObjectOfType<Canvas>().transform);
+    void Awake() {
+        GameObject prefab = Resources.Load<GameObject>("ProgressBar/UI ProgressBar");
+        prefab.GetComponent<ProgressBar>().BarColor = tag == "Player" ? Color.green:Color.yellow;
+        prefabCriado = Canvas.Instantiate<GameObject>(prefab, posVida.transform.position, posVida.transform.rotation, Canvas.FindObjectOfType<Canvas>().transform);
         prefabCriado.transform.position = new Vector3(-260, -67, 0);
         Pb = prefabCriado.GetComponent<ProgressBar>();
         Pb.BarValue = vidaAtual;
-        Pb.BarColor = CorVida;
-        Pb.BarAlertColor = CorVidaCritica;
+        photonView.RPC("MeuNick", RpcTarget.AllBuffered);
     }
-
+    [PunRPC]
+    void MeuNick(){
+        Pb.Title = tag == "Player" ? photonView.Owner.NickName:"Fordo";
+    }
+    private void Start() {   
+    }
     void FixedUpdate() {
         
          if (photonView.IsMine)
