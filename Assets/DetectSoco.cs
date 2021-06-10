@@ -4,16 +4,16 @@ using UnityEngine;
 using Photon.Pun;
 public class DetectSoco : MonoBehaviourPunCallbacks
 {
-    Vida aux_vida;
     void OnTriggerEnter(Collider other) {
-        aux_vida=other.GetComponent<Vida>();
-        if (photonView.IsMine){
-            photonView.RPC("RetirarVidaPlayer", RpcTarget.All);
+        if(photonView.IsMine){
+            other.GetComponent<Vida>().photonView.RPC("vidaPlayer", RpcTarget.All, 10);
+            Debug.Log(other);
+            photonView.RPC("DesativarBoxColliderPunho", RpcTarget.All);
         }
     }
+
     [PunRPC]
-    void RetirarVidaPlayer(){
-        aux_vida.vidaAtual -= 10;
+    public void DesativarBoxColliderPunho(){
         gameObject.SetActive(false);
     }
 

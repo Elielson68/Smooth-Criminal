@@ -31,28 +31,13 @@ public class MovimentacaoOnline : MonoBehaviourPunCallbacks
         if (photonView.IsMine)
         {
             photonView.RPC("CongelarMovimento", RpcTarget.All);
-            if (Input.GetKey(KeyCode.F))
+            if (Input.GetAxisRaw("Fire1")==1)
             {
                 photonView.RPC("Socando", RpcTarget.All);
             }
             else if (!animator.GetBool("socando"))
             {
-                if (Input.GetKey(KeyCode.D))
-                {
-                    photonView.RPC("MovendoDireita", RpcTarget.All);
-                }
-                if (Input.GetKey(KeyCode.A))
-                {
-                    photonView.RPC("MovendoEsquerda", RpcTarget.All);
-                }
-                if (Input.GetKey(KeyCode.S))
-                {
-                    photonView.RPC("MovendoBaixo", RpcTarget.All);
-                }
-                if (Input.GetKey(KeyCode.W))
-                {
-                    photonView.RPC("MovendoCima", RpcTarget.All);
-                }
+                photonView.RPC("Movendo", RpcTarget.All);
             }
             if(!Input.anyKey)
             {
@@ -61,38 +46,39 @@ public class MovimentacaoOnline : MonoBehaviourPunCallbacks
         }
     }
     [PunRPC]
-    void MovendoEsquerda()
-    {
-        transform.rotation = Quaternion.Euler(0, 180, 0);
-        animator.SetBool("parado", false);
-        Rgdb.velocity = new Vector2(-2f, 0f);
-    }
-    [PunRPC]
     void CongelarMovimento(){
         if(animator.GetBool("socando")){
             Rgdb.velocity = new Vector2(0f, 0f);
         }
     }
     [PunRPC]
-    void MovendoDireita()
+    void Movendo()
     {
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        animator.SetBool("parado", false);
-        Rgdb.velocity = new Vector2(2f, 0f);
-    }
-    [PunRPC]
-    void MovendoCima()
-    {
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        animator.SetBool("parado", false);
-        Rgdb.velocity = Vector3.forward * 2f;
-    }
-    [PunRPC]
-    void MovendoBaixo()
-    {
-        transform.rotation = Quaternion.Euler(0, 0, 0);
-        animator.SetBool("parado", false);
-        Rgdb.velocity = Vector3.forward * -2f;
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
+        if(horizontal!=0 || vertical!=0){
+            animator.SetBool("parado", false);
+        }
+        Rgdb.velocity = new Vector3( horizontal* 2f, Rgdb.velocity.y, vertical * 2f);
+        Vector3 rotacao = gameObject.transform.localEulerAngles;
+        if(Input.GetKey(KeyCode.M)){
+            
+            if(horizontal==1){
+                gameObject.transform.localEulerAngles = new Vector3(rotacao.x, -180, rotacao.z);
+            }
+            else if (horizontal==-1){
+                gameObject.transform.localEulerAngles = new Vector3(rotacao.x, 0, rotacao.z);
+            }
+        }
+        else{
+            if(horizontal==1){
+                gameObject.transform.localEulerAngles = new Vector3(rotacao.x, 0, rotacao.z);
+            }
+            else if (horizontal==-1){
+                gameObject.transform.localEulerAngles = new Vector3(rotacao.x, -180, rotacao.z);
+            }
+        }
+        
     }
     [PunRPC]
     void Socando()

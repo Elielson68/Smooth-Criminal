@@ -209,7 +209,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 2
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 0341462a4c65c324c9bdc215b65c8ccf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -217,7 +217,7 @@ SpriteRenderer:
   m_Size: {x: 1.36, y: 2.59}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &3895869125761783764
@@ -353,6 +353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7994667367dc70443a439a059a5a243e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BarraVida: {fileID: 114769781544105922, guid: 5eefba205a58c8c4a937c97b87c185a3, type: 3}
   posVida: {fileID: 1819711130}
   vidaAtual: 100
+  corVida: {r: 0.039961115, g: 0.990566, b: 0.0046724924, a: 1}
+  corVidaCritica: {r: 1, g: 0, b: 0, a: 1}

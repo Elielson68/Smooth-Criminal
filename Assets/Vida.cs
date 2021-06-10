@@ -6,53 +6,50 @@ using Photon.Pun;
 using Photon.Realtime;
 public class Vida : MonoBehaviourPunCallbacks
 {
-    [SerializeField] private ProgressBar BarraVida;
-    public ProgressBar Pb { get { return BarraVida; } set { BarraVida = value; } }
+    private ProgressBar barraVida;
+    public ProgressBar Pb { get { return barraVida; } set { barraVida = value; } }
     public GameObject posVida;
     private GameObject prefabCriado;
     //public Camera cam;
     public float vidaAtual = 100;
-    void Awake() {
+    public Color corVida;
+    public Color corVidaCritica;
+    
+    private void Start() {
+        CreateLifeBar(); 
+    }
+
+    void CreateLifeBar(){
         GameObject prefab = Resources.Load<GameObject>("ProgressBar/UI ProgressBar");
-        prefab.GetComponent<ProgressBar>().BarColor = tag == "Player" ? Color.green:Color.yellow;
         prefabCriado = Canvas.Instantiate<GameObject>(prefab, posVida.transform.position, posVida.transform.rotation, Canvas.FindObjectOfType<Canvas>().transform);
+        /* prefabCriado.GetComponent<ProgressBar>().BarColor = corVida;
+        prefabCriado.GetComponent<ProgressBar>().BarAlertColor = corVidaCritica;
+        prefabCriado.GetComponent<ProgressBar>().BarValue = 100; */
         prefabCriado.transform.position = new Vector3(-260, -67, 0);
         Pb = prefabCriado.GetComponent<ProgressBar>();
+        Pb.BarColor = corVida;
+        Pb.BarAlertColor = corVidaCritica;
         Pb.BarValue = vidaAtual;
-        photonView.RPC("MeuNick", RpcTarget.AllBuffered);
-    }
-    [PunRPC]
-    void MeuNick(){
         Pb.Title = tag == "Player" ? photonView.Owner.NickName:"Fordo";
-    }
-    private void Start() {   
-    }
-    void FixedUpdate() {
-        
-         if (photonView.IsMine)
-        {
-            if(vidaAtual == 0){
-                photonView.RPC("VerificarMorte", RpcTarget.All);
-            }
-            photonView.RPC("MovimentarVida", RpcTarget.All);
-            photonView.RPC("vidaPlayer", RpcTarget.All);
-        }
 
+    }
+    
+    void FixedUpdate() {
+        if(Pb.BarValue <= 0){
+            photonView.RPC("VerificarMorte", RpcTarget.All);
+        }
+        Vector3 Posicao = Camera.FindObjectOfType<Camera>().WorldToScreenPoint(posVida.transform.position);
+        prefabCriado.transform.position = Posicao;
     }
     [PunRPC]
     void VerificarMorte(){
         gameObject.GetComponent<Animator>().SetBool("morrendo", true);
         prefabCriado.SetActive(false);
     }
+    
     [PunRPC]
-    void MovimentarVida(){
-        
-        Vector3 Posicao = Camera.FindObjectOfType<Camera>().WorldToScreenPoint(posVida.transform.position);
-        prefabCriado.transform.position = Posicao;
-    }
-    [PunRPC]
-    void vidaPlayer(){
-        Pb.BarValue = vidaAtual;
+    public void vidaPlayer(int value){
+        Pb.BarValue -= value;
     }
     
     void DanoLevado(){
@@ -69,9 +66,35 @@ public class Vida : MonoBehaviourPunCallbacks
     }
     [PunRPC]
     void RPCDanoLevado(){
-        
+        if(tag == "Inimigo"){
+            GameManager.Instance.photonView.RPC("RetirarInimigo", RpcTarget.All);
+        }
+        else if(tag == "Player"){
+             GameManager.Instance.RetirarJogadorDeLista(gameObject);
+        }
+        if(GameManager.Instance.QuantidadeDeInimigos() == 0){
+            Round.Instance.AtualizarRound();
+            int quantidadeInimigosParaSpawnar = (int) Mathf.Pow(2, Round.Instance.round);
+            for(int x=0;x<quantidadeInimigosParaSpawnar;x++){
+                if(photonView.IsMine){
+                    GameManager.Instance.CriarInimigo();
+                    GameManager.Instance.photonView.RPC("AdicionarInimigo", RpcTarget.All);
+                }
+            }
+        }
+        else if(GameManager.Instance.QuantidadeDePlayersEmCena() == 0){
+            Timer.Instance.photonView.RPC("PararTimer", RpcTarget.All);
+        }
         Destroy(gameObject);
         Destroy(prefabCriado);
+    }
+
+    public void PararDano(){
+        photonView.RPC("RPCPararDano", RpcTarget.All);
+    }
+    [PunRPC]
+    public void RPCPararDano(){
+        gameObject.GetComponent<Animator>().SetBool("levandoDano", false);
     }
 
 }

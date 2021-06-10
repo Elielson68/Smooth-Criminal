@@ -12,9 +12,12 @@ public class GameManager : MonoBehaviourPunCallbacks
     [SerializeField] private Transform _spawnJogadores;
     [SerializeField] public GameObject _spawnInferior;
     [SerializeField] public GameObject _spawnSuperior;
+    [SerializeField] public Transform _spawnInimigos;
     private int _jogadoresEmJogo;
     private List<CriarSpritePlayer> _jogadores;
-
+    private int quantidadeDeInimigosEmCena = 0;
+    private List<GameObject> playersEmCena = new List<GameObject>();
+    private GameObject novoInimigo;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -23,15 +26,17 @@ public class GameManager : MonoBehaviourPunCallbacks
             return;
         }
         Instance = this;
+        if(PhotonNetwork.IsMasterClient){
+            photonView.RPC("CriarInimigo", RpcTarget.Others);
+            photonView.RPC("AdicionarInimigo", RpcTarget.AllBuffered);
+        }
         DontDestroyOnLoad(gameObject);
     }
-
     private void Start()
     {
         photonView.RPC("AdicionaJogador", RpcTarget.AllBuffered);
-        _jogadores = new List<CriarSpritePlayer>();
+        _jogadores = new List<CriarSpritePlayer>();  
     }
-
 
     [PunRPC]
     private void AdicionaJogador()
@@ -42,7 +47,38 @@ public class GameManager : MonoBehaviourPunCallbacks
             CriaJogador();
         }
     }
+    public void AdicionarJogadorEmLista(GameObject player){
+        playersEmCena.Add(player);
+    }
+    public void RetirarJogadorDeLista(GameObject player){
+        playersEmCena.Remove(playersEmCena.Find(x => x.Equals(player)));
+    }
+    public int QuantidadeDePlayersEmCena(){
+        return playersEmCena.Count;
+    }
 
+    [PunRPC]
+    public void AdicionarInimigo(){
+        quantidadeDeInimigosEmCena++;
+    }
+    [PunRPC]
+    public void RetirarInimigo(){
+        quantidadeDeInimigosEmCena--;
+    }
+    public int QuantidadeDeInimigos(){
+        return quantidadeDeInimigosEmCena;
+    }
+    [PunRPC]
+    public void CriarInimigo(){
+        float maxZ = 4.17f;
+        float minZ = -1.09f;
+        float minX = 5.34f;
+        float maxX = 8.88f;
+        float z = Random.Range(minZ, maxZ);
+        float x = Random.Range(minX, maxX);
+        _spawnInimigos.position = new Vector3(x, _spawnInimigos.position.y, z);
+        novoInimigo = PhotonNetwork.Instantiate("Inimigo2 Variant", _spawnInimigos.position, Quaternion.identity);
+    }
     private void CriaJogador()
     {
         var jogadorObj = PhotonNetwork.Instantiate(_localizacaoPrefab, _spawnJogadores.position, Quaternion.identity);

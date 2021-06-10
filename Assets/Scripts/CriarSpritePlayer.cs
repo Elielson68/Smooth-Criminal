@@ -12,13 +12,15 @@ public class CriarSpritePlayer : MonoBehaviourPunCallbacks
     public Player _photonPlayer;
     private int _id;
     public Animator animator;
+
     [PunRPC]
     public void Inicializa(Player player)
     {
         _photonPlayer = player;
         _id = player.ActorNumber;
         GameManager.Instance.Jogadores.Add(this);
-        
+        GameManager.Instance.AdicionarJogadorEmLista(gameObject);
+        Debug.Log($"Quantidade de jogadores: {GameManager.Instance.QuantidadeDePlayersEmCena()}");
         if (player.IsMasterClient)
         {
             SpriteRenderer Host = GetComponent<SpriteRenderer>();
