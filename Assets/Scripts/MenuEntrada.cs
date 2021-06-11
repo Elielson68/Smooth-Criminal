@@ -2,16 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using Photon.Realtime;
 public class MenuEntrada : MonoBehaviour
 {
-    [SerializeField] private Text _nomeDoJogador, _nomeDaSala, _errorEntrarSala;
-
+    
+    [SerializeField] private Text _nomeDoJogador, _nomeDaSala;
 
     public void CriaSala()
     {
         GestorDeRede.Instance.MudaNick(_nomeDoJogador.text);
-        GestorDeRede.Instance.CriaSala(_nomeDaSala.text);
+        RoomOptions roomOptions = new RoomOptions();
+        roomOptions.MaxPlayers = 2;
+        GestorDeRede.Instance.CriaSala(_nomeDaSala.text, roomOptions);
+
     }
     public void EntraSala()
     {
@@ -19,11 +22,8 @@ public class MenuEntrada : MonoBehaviour
         GestorDeRede.Instance.EntraSala(_nomeDaSala.text);
     }
 
-    public void VerificarJogadores(){
-        if(GestorDeRede.Instance.ObterQuantidadeDeJogadores() > 2){
-            _errorEntrarSala.text = "SALA CHEIA!";
-            _nomeDoJogador.text = "";
-            _nomeDaSala.text = "";
-        }
+    public void LimparCampos(){
+        _nomeDoJogador.text = "";
+        _nomeDaSala.text = "";
     }
 }

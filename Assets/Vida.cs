@@ -61,31 +61,38 @@ public class Vida : MonoBehaviourPunCallbacks
                 Sair.GetComponent<Button>().enabled = true;
                 Sair.GetComponentInChildren<Text>().text = "Sair";
             }
-            photonView.RPC("RPCDanoLevado", RpcTarget.All);
         }
+        RPCDanoLevado();
     }
-    [PunRPC]
     void RPCDanoLevado(){
+        Debug.LogError($"Quantidade de inimigos: {GameManager.Instance.QuantidadeDeInimigos()}");
         if(tag == "Inimigo"){
             GameManager.Instance.photonView.RPC("RetirarInimigo", RpcTarget.All);
+            Debug.LogError($"Quantidade de inimigos após retirar 1 inimigo: {GameManager.Instance.QuantidadeDeInimigos()}");
         }
         else if(tag == "Player"){
              GameManager.Instance.RetirarJogadorDeLista(gameObject);
         }
         if(GameManager.Instance.QuantidadeDeInimigos() == 0){
-            Round.Instance.AtualizarRound();
+            Debug.LogError("Minha tag é: "+tag);
+            Round.Instance.photonView.RPC("AtualizarRound", RpcTarget.All);
             int quantidadeInimigosParaSpawnar = (int) Mathf.Pow(2, Round.Instance.round);
             for(int x=0;x<quantidadeInimigosParaSpawnar;x++){
-                if(photonView.IsMine){
-                    GameManager.Instance.CriarInimigo();
-                    GameManager.Instance.photonView.RPC("AdicionarInimigo", RpcTarget.All);
-                }
+                HordarController.Instance.CriarInimigo();
+                GameManager.Instance.photonView.RPC("AdicionarInimigo", RpcTarget.All);
             }
+            Debug.LogError($"Quantidade de inimigos após rodar o loop for: {GameManager.Instance.QuantidadeDeInimigos()}");   
         }
         else if(GameManager.Instance.QuantidadeDePlayersEmCena() == 0){
             Timer.Instance.photonView.RPC("PararTimer", RpcTarget.All);
         }
-        Destroy(gameObject);
+        if(tag == "Player"){
+            PhotonNetwork.DestroyPlayerObjects(GetComponent<CriarSpritePlayer>()._id, false);
+        }
+        else{
+            PhotonNetwork.Destroy(gameObject);
+        }
+        
         Destroy(prefabCriado);
     }
 
@@ -97,4 +104,5 @@ public class Vida : MonoBehaviourPunCallbacks
         gameObject.GetComponent<Animator>().SetBool("levandoDano", false);
     }
 
+    
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -8,7 +9,7 @@ public class Menu : MonoBehaviourPunCallbacks
 {
     [SerializeField] private MenuEntrada _menuEntrada;
     [SerializeField] private MenuLobby _menuLobby;
-
+    [SerializeField] private Text _errorMenuEntrada;
     private void Start()
     {
         _menuEntrada.gameObject.SetActive(false);
@@ -24,12 +25,20 @@ public class Menu : MonoBehaviourPunCallbacks
     {
         MudaMenu(_menuLobby.gameObject);
         _menuLobby.photonView.RPC("AtualizaLista", RpcTarget.All);
-        if(GestorDeRede.Instance.ObterQuantidadeDeJogadores() > 2){
-            SairDoLobby();
-        }
-        _menuEntrada.VerificarJogadores();
+        
     }
 
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        _errorMenuEntrada.text = "SALA CHEIA!";
+        _menuEntrada.LimparCampos();
+        
+    }
+    public override void OnCreateRoomFailed(short returnCode, string message)
+    {
+        _errorMenuEntrada.text = "NOME DA SALA JÁ EXISTE!";
+        _menuEntrada.LimparCampos();
+    }
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         _menuLobby.AtualizaLista();

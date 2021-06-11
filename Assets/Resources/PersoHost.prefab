@@ -146,6 +146,7 @@ GameObject:
   - component: {fileID: 1214154743535042165}
   - component: {fileID: 8444324798831032745}
   - component: {fileID: 6164489027789092611}
+  - component: {fileID: 8017009810895580672}
   m_Layer: 6
   m_Name: PersoHost
   m_TagString: Player
@@ -268,8 +269,7 @@ MonoBehaviour:
   animator: {fileID: 3895869125761783764}
   rgdb: {fileID: 8444324798831032745}
   Punho: {fileID: 615694950}
-  velEixoZ: 0
-  velEixoY: 0
+  velMovimento: 0
   Valor: 100
   _pontoReferenciaInferior: {fileID: 0}
   _pontoReferenciaSuperior: {fileID: 0}
@@ -288,11 +288,12 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 3
+  Synchronization: 2
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
   - {fileID: 3895869125761783772}
+  - {fileID: 8017009810895580672}
   sceneViewId: 2
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -357,3 +358,30 @@ MonoBehaviour:
   vidaAtual: 100
   corVida: {r: 0.039961115, g: 0.990566, b: 0.0046724924, a: 1}
   corVidaCritica: {r: 1, g: 0, b: 0, a: 1}
+--- !u!114 &8017009810895580672
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3895869125761783765}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 4
+    SynchronizeType: 1
+    Name: parado
+  - Type: 4
+    SynchronizeType: 1
+    Name: socando
+  - Type: 4
+    SynchronizeType: 1
+    Name: morrendo
+  m_SynchronizeLayers:
+  - SynchronizeType: 1
+    LayerIndex: 0

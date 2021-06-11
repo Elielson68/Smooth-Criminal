@@ -2527,6 +2527,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _menuEntrada: {fileID: 1967156104}
   _menuLobby: {fileID: 758120407}
+  _errorMenuEntrada: {fileID: 1945900715}
 --- !u!1 &1945900713
 GameObject:
   m_ObjectHideFlags: 0
@@ -2539,7 +2540,7 @@ GameObject:
   - component: {fileID: 1945900716}
   - component: {fileID: 1945900715}
   m_Layer: 0
-  m_Name: Text
+  m_Name: ErrorMenuEntrada
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2561,8 +2562,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.001173, y: -101.98}
-  m_SizeDelta: {x: 533.34, y: 135.59}
+  m_AnchoredPosition: {x: -0.52, y: -110.14}
+  m_SizeDelta: {x: 931.1, y: 189.98}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1945900715
 MonoBehaviour:
@@ -2640,7 +2641,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nomeDoJogador: {fileID: 505728737}
   _nomeDaSala: {fileID: 217652163}
-  _errorEntrarSala: {fileID: 1945900715}
 --- !u!114 &1967156105
 MonoBehaviour:
   m_ObjectHideFlags: 0

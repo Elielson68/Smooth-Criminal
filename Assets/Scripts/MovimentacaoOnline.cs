@@ -11,17 +11,16 @@ public class MovimentacaoOnline : MonoBehaviourPunCallbacks
     [SerializeField] private Rigidbody rgdb;
     public Rigidbody Rgdb { get => rgdb; set => rgdb = value; }
     public GameObject Punho;
-    public float velEixoZ;
-    public float velEixoY;
-    [SerializeField] private int Valor = 100;
-    [SerializeField] public Transform _pontoReferenciaInferior;
-    [SerializeField] public Transform _pontoReferenciaSuperior;
+    [SerializeField] private float velMovimento;
+    [SerializeField] public Transform _pontoReferenciaInferior, _pontoReferenciaSuperior;
     void Start()
     {
-        animator = GetComponent<Animator>();
-        Rgdb = GetComponent<Rigidbody>();
-        velEixoZ = 4f;
-        velEixoY = 2f;
+        if (photonView.IsMine)
+        {
+            animator = GetComponent<Animator>();
+            Rgdb = GetComponent<Rigidbody>();
+            velMovimento=200f;
+        }
     }
 
     
@@ -54,30 +53,34 @@ public class MovimentacaoOnline : MonoBehaviourPunCallbacks
     [PunRPC]
     void Movendo()
     {
-        float horizontal = Input.GetAxisRaw("Horizontal");
-        float vertical = Input.GetAxisRaw("Vertical");
-        if(horizontal!=0 || vertical!=0){
-            animator.SetBool("parado", false);
+        if(photonView.IsMine){
+            float horizontal = Input.GetAxisRaw("Horizontal");
+            float vertical = Input.GetAxisRaw("Vertical");
+            if(horizontal!=0 || vertical!=0){
+                animator.SetBool("parado", false);
+            }
+            float precision = PhotonNetwork.PrecisionForFloatSynchronization;
+            Rgdb.velocity = new Vector3( horizontal* velMovimento*precision, Rgdb.velocity.y, vertical * velMovimento*precision);
+            Vector3 rotacao = gameObject.transform.localEulerAngles;
+            if(Input.GetKey(KeyCode.M)){
+                
+                if(horizontal==1){
+                    gameObject.transform.localEulerAngles = new Vector3(rotacao.x, -180, rotacao.z);
+                }
+                else if (horizontal==-1){
+                    gameObject.transform.localEulerAngles = new Vector3(rotacao.x, 0, rotacao.z);
+                }
+            }
+            else{
+                if(horizontal==1){
+                    gameObject.transform.localEulerAngles = new Vector3(rotacao.x, 0, rotacao.z);
+                }
+                else if (horizontal==-1){
+                    gameObject.transform.localEulerAngles = new Vector3(rotacao.x, -180, rotacao.z);
+                }
+            }
         }
-        Rgdb.velocity = new Vector3( horizontal* 2f, Rgdb.velocity.y, vertical * 2f);
-        Vector3 rotacao = gameObject.transform.localEulerAngles;
-        if(Input.GetKey(KeyCode.M)){
-            
-            if(horizontal==1){
-                gameObject.transform.localEulerAngles = new Vector3(rotacao.x, -180, rotacao.z);
-            }
-            else if (horizontal==-1){
-                gameObject.transform.localEulerAngles = new Vector3(rotacao.x, 0, rotacao.z);
-            }
-        }
-        else{
-            if(horizontal==1){
-                gameObject.transform.localEulerAngles = new Vector3(rotacao.x, 0, rotacao.z);
-            }
-            else if (horizontal==-1){
-                gameObject.transform.localEulerAngles = new Vector3(rotacao.x, -180, rotacao.z);
-            }
-        }
+        
         
     }
     [PunRPC]

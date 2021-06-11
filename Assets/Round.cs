@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class Round : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+public class Round : MonoBehaviourPunCallbacks
 {
     public int round = 1;
     public static Round Instance { get; private set; }
@@ -22,7 +24,7 @@ public class Round : MonoBehaviour
     private void FixedUpdate() {
         GetComponent<Text>().text = $"Round: {round}";    
     }
-
+    [PunRPC]
     public void AtualizarRound(){
         round++;
     }

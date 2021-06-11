@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviourPunCallbacks
     private List<CriarSpritePlayer> _jogadores;
     private int quantidadeDeInimigosEmCena = 0;
     private List<GameObject> playersEmCena = new List<GameObject>();
-    private GameObject novoInimigo;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,7 +26,6 @@ public class GameManager : MonoBehaviourPunCallbacks
         }
         Instance = this;
         if(PhotonNetwork.IsMasterClient){
-            photonView.RPC("CriarInimigo", RpcTarget.Others);
             photonView.RPC("AdicionarInimigo", RpcTarget.AllBuffered);
         }
         DontDestroyOnLoad(gameObject);
@@ -77,7 +75,7 @@ public class GameManager : MonoBehaviourPunCallbacks
         float z = Random.Range(minZ, maxZ);
         float x = Random.Range(minX, maxX);
         _spawnInimigos.position = new Vector3(x, _spawnInimigos.position.y, z);
-        novoInimigo = PhotonNetwork.Instantiate("Inimigo2 Variant", _spawnInimigos.position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Inimigo2 Variant", _spawnInimigos.position, Quaternion.identity);
     }
     private void CriaJogador()
     {

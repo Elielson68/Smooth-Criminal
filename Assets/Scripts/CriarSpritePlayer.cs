@@ -10,7 +10,7 @@ public class CriarSpritePlayer : MonoBehaviourPunCallbacks
     [SerializeField] private Rigidbody rgdb;
     public Rigidbody Rgdb { get => rgdb; set => rgdb = value; }
     public Player _photonPlayer;
-    private int _id;
+    public int _id;
     public Animator animator;
 
     [PunRPC]
@@ -19,8 +19,6 @@ public class CriarSpritePlayer : MonoBehaviourPunCallbacks
         _photonPlayer = player;
         _id = player.ActorNumber;
         GameManager.Instance.Jogadores.Add(this);
-        GameManager.Instance.AdicionarJogadorEmLista(gameObject);
-        Debug.Log($"Quantidade de jogadores: {GameManager.Instance.QuantidadeDePlayersEmCena()}");
         if (player.IsMasterClient)
         {
             SpriteRenderer Host = GetComponent<SpriteRenderer>();

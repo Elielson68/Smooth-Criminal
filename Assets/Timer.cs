@@ -6,6 +6,7 @@ using Photon.Pun;
 using Photon.Realtime;
 public class Timer : MonoBehaviourPunCallbacks
 {
+    float milesimos = 0;
     float segundos = 0;
     float minutos = 0;
     float hour = 0;
@@ -22,7 +23,10 @@ public class Timer : MonoBehaviourPunCallbacks
         DontDestroyOnLoad(gameObject);
     }
     private void FixedUpdate() {
-        segundos =  timeUp ? segundos+Time.fixedDeltaTime : segundos;
+        milesimos =  timeUp ? milesimos+((float)PhotonNetwork.Time) : milesimos;
+        if(milesimos > 59){
+            segundos++;
+        }
         if(segundos > 59){
             segundos = 0;
             minutos++;

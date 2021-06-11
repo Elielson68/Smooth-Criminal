@@ -10,7 +10,6 @@ public class MovimentacaoOffline : MonoBehaviour
     [SerializeField] private Rigidbody rgdb;
     public Rigidbody Rgdb { get => rgdb; set => rgdb = value; }
     public GameObject Punho;
-    [SerializeField] private int Valor = 100;
     [SerializeField] private Transform _pontoReferenciaInferior;
     [SerializeField] private Transform _pontoReferenciaSuperior;
     void Start()

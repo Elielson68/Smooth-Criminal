@@ -2,7 +2,7 @@ using Photon.Pun;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Realtime;
 public class GestorDeRede : MonoBehaviourPunCallbacks
 {
     public static GestorDeRede Instance { get; private set; }
@@ -32,16 +32,16 @@ public class GestorDeRede : MonoBehaviourPunCallbacks
     }
 
 
-    public void CriaSala(string nomeSala)
+    public bool CriaSala(string nomeSala, RoomOptions options)
     {
-        PhotonNetwork.CreateRoom(nomeSala);
+        return PhotonNetwork.CreateRoom(nomeSala, options);
     }
 
-    public void EntraSala(string nomeSala)
+    public bool EntraSala(string nomeSala)
     {
-        PhotonNetwork.JoinRoom(nomeSala);
+        return PhotonNetwork.JoinRoom(nomeSala);
     }
-
+    
     public void MudaNick(string nickName)
     {
         PhotonNetwork.NickName = nickName;
